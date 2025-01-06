@@ -1,28 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using WebAppRepo.Models;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace WebAppRepo.Data
 {
     public class AppDbContext : DbContext
     {
-        protected readonly IConfiguration Configuration;
 
-        public AppDbContext(IConfiguration configuration)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
-            Configuration = configuration;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-        }
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<User> Users { get; set; } = default!;
+        public DbSet<Category> Categories { get; set; } = default!;
+        public DbSet<Review> Reviews { get; set; } = default!;
+        public DbSet<Product> Products { get; set; } = default!;
+        public DbSet<Order> Orders { get; set; } = default!;
     }
 }
